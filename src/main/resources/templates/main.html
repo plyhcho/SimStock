@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sim Stock</title>
+</head>
+<body>
+<p th:text="'안녕하세요~ ' + ${data} + '님'">안녕하세요 고객님.</p>
+
+<div>
+    <input type="text" id="StockName" />
+    <input type="button" id="StockButton" value="검색"/>
+</div>
+</body>
+
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+            $('#StockButton').click(function(){
+                    $.ajax({
+                        url: "/item",
+                        data: "name="+$('#StockName').val(),
+                        type:"GET",
+                    }).done(function (fragment) {
+                        console.info(fragment);
+                    });
+            })
+    </script>
+</th:block>
+</html>
