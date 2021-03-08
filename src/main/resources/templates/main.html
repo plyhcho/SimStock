@@ -12,6 +12,11 @@
     <input type="text" id="StockName" />
     <input type="button" id="StockButton" value="검색"/>
 </div>
+
+<div id="divStockList">
+
+</div>
+
 </body>
 
 
@@ -23,9 +28,16 @@
                         url: "/item",
                         data: "name="+$('#StockName').val(),
                         type:"GET",
-                    }).done(function (fragment) {
-                        console.info(fragment);
-                    });
+                        success:function(data){
+                            if(data.length > 0){
+                                var html = '';
+                                for(i=0; i<data.length; i++){
+                                    html = html + "<p> " + data[i].name + data[i].code + " </p>";
+                                    $('#divStockList').html(html);
+                                }
+                            }
+                        }
+                    });;
             })
     </script>
 </th:block>

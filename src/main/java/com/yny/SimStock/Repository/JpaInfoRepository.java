@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-//커밋테스트
 @Repository
 public class JpaInfoRepository implements InfoRepository{
     private final EntityManager em;
@@ -18,11 +17,8 @@ public class JpaInfoRepository implements InfoRepository{
 
     @Override
     public List<Basic> basic(String name){
-
-        //List<Basic> bs = em.createQuery("select m from tbl_Stock_Master m",Basic.class).getResultList();
-
-        return em.createQuery("select m from Basic m where m.Name like :name",Basic.class)
-                .setParameter("name",name)
+        return em.createQuery("select m from Basic m where m.Name Like :name",Basic.class)
+                .setParameter("name", "%" + name + "%")
                 .getResultList();
     }
 }
